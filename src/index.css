@@ -3,3 +3,14 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.card-margin {
+  margin-left: 60px;
+}
+
+.card-img {
+  width: 70%;
+  height: auto;
+  margin: auto;
+  margin-top: 40px;
+}
