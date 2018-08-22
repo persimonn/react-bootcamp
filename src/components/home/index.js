@@ -6,9 +6,23 @@ import Modal from "../postModal/index.js";
 import LightBox from "../lightBox/index.js";
 
 class Home extends Component {
-  state = {
-    isModalOpen: false
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isModalOpen: false
+    };
+
+    props.validateToken();
+  }
+
+  componentDidUpdate() {
+    const { loginReducer } = this.props;
+
+    if (!loginReducer.isLogged) {
+      this.props.history.push("/login");
+    }
+  }
 
   handleOpenModal = () => {
     this.setState({ isModalOpen: true });
