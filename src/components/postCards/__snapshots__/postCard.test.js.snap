@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`testing postCard renders snapshot 1`] = `
+<div
+  className="col-12 mt-5"
+>
+  <div
+    className="card"
+  >
+    <img
+      className="card-img"
+    />
+    <div
+      className="card-body card-margin"
+    >
+      <h5
+        className="card-title"
+      />
+      <p
+        className="card-text"
+      />
+    </div>
+  </div>
+</div>
+`;

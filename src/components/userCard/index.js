@@ -1,6 +1,10 @@
 import React from "react";
 import "./index.css";
 
+export const sum = (a, b) => {
+  return a + b;
+};
+
 const UserCard = ({ avatar, userName }) => {
   return (
     <div className="container">

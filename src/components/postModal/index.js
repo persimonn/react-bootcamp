@@ -3,22 +3,42 @@ import "./index.css";
 
 class Modal extends Component {
   state = {
-    imgUrl: null
+    imgUrl: null,
+    formData: null,
+    caption: ""
   };
 
   handleAddImage = event => {
+    console.log("test");
     const file = event.target.files[0];
 
     const fileReader = new FileReader();
+    const formData = new FormData();
+
+    formData.append("media", file);
 
     fileReader.onloadend = () => {
-      this.setState({
-        imgUrl: fileReader.result
-      });
+      this.setState({ formData, imgUrl: fileReader.result });
     };
 
     fileReader.readAsDataURL(file);
   };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    const { formData, caption } = this.state;
+    this.props.submitPost(formData, caption).then(() => {
+      this.props.getPosts();
+    });
+  };
+
+  componentDidUpdate() {
+    if (this.props.postsReducer.isSubmitted) {
+      this.props.handleCloseModal();
+    }
+  }
+
+  onChange = e => this.setState({ caption: e.target.value });
 
   render() {
     const { imgUrl } = this.state;
@@ -34,11 +54,15 @@ class Modal extends Component {
             <form>
               <div className="mb-3">
                 <label>Caption</label>
-                <input className="form-control" type="text" />
+                <input
+                  className="form-control"
+                  type="text"
+                  onChange={this.onChange}
+                />
               </div>
               <input type="file" onChange={this.handleAddImage} />
             </form>
-            {imgUrl ? <img src={imgUrl} alt="" /> : null}
+            {imgUrl ? <img className="img-fluid" src={imgUrl} alt="" /> : null}
           </div>
           <div className="modal-footer">
             <button
@@ -48,7 +72,11 @@ class Modal extends Component {
             >
               Close
             </button>
-            <button type="button" className="btn btn-primary">
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={this.handleSubmit}
+            >
               Save changes
             </button>
           </div>

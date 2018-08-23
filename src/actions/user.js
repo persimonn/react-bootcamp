@@ -52,6 +52,7 @@ export const login = (email, password) => {
         hashedPassword: sha256(password)
       })
       .then(res => {
+        console.log("sent");
         const { token } = res.data.payload;
         localStorage.setItem("jwtToken", token);
         dispatch(loginSuccess());
@@ -63,6 +64,7 @@ export const login = (email, password) => {
 };
 
 export const register = (email, username, password) => {
+  console.log("test");
   return dispatch => {
     return axios
       .post(`${API.BASE}${API.REGISTER}`, {
@@ -71,9 +73,11 @@ export const register = (email, username, password) => {
         hashedPassword: sha256(password)
       })
       .then(() => {
+        console.log("sent");
         dispatch(registerSuccess());
       })
       .catch(() => {
+        console.log("not sent");
         dispatch(registerError());
       });
   };

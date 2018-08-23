@@ -36,7 +36,7 @@ class Register extends Component {
             />
             <input
               type="text"
-              name="email"
+              name="username"
               id="inputUserName"
               className="form-control"
               placeholder="Username"

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Header from "../header/index.js";
-import Posts from "../posts/index.js";
+import Posts from "../../containers/posts/index.js";
 import UserList from "../userList/index.js";
-import Modal from "../postModal/index.js";
+import Modal from "../../containers/postModal/index.js";
 import LightBox from "../lightBox/index.js";
 
 class Home extends Component {

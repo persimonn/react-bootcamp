@@ -7,15 +7,22 @@ import catImg4 from "../../media/bwcat4.jpg";
 import catImg5 from "../../media/bwcat5.jpg";
 
 class Posts extends Component {
+  componentDidMount() {
+    this.props.getPosts();
+  }
+
   render() {
+    console.log(this.props);
+    if (!this.props.postsReducer || !this.props.postsReducer.list) {
+      return null;
+    }
+
     return (
       <div className="container">
         <div className="row">
-          <PostCard image={catImg5} text="some text" title="some title" />
-          <PostCard image={catImg4} text="other text" title="other title" />
-          <PostCard image={catImg3} text="more text" title="more title" />
-          <PostCard image={catImg2} text="more else text" title="more else" />
-          <PostCard image={catImg1} text="som text" title="som title" />
+          {this.props.postsReducer.list.map(el => (
+            <PostCard key={el._id} image={el.media.path} title={el.title} />
+          ))}
         </div>
       </div>
     );
